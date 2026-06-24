@@ -1,0 +1,23 @@
+{
+    "name": "SIMPLE_Buzzer",
+    "keywords": "Buzzer, ESP32",
+    "description": "Library for controlling a buzzer on ESP32",
+    "authors":
+    [
+      {
+        "name": "Greg Runnels",
+        "email": "grunnels@gmail.com",
+        "maintainer": true
+      }
+    ],
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/grunnels/SimpleBuzzer.git"
+    },
+    "version": "0.3.0",
+    "license": "",
+    "frameworks": "*",
+    "platforms": "*",
+    "headers": "simpleBuzzer.h"
+  }
