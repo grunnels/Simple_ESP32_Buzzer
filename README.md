@@ -14,7 +14,8 @@ setMuteBuzzer(true);              // stops anything playing; unmuting beeps 3 ti
 isBuzzerMuted();
 ```
 
-- Always starts unmuted after a reboot.
+- Mute isn't remembered: every boot starts unmuted. Build with `-D SILENCE_BUZZER` (bench units) to start muted,
+  or call `setMuteBuzzer(true)` - before or after `setupBuzzer()`, either works.
 - Up to 8 patterns wait their turn; more than that are skipped.
 - `setupBuzzer()` adds the standard **M** serial command: `#m` toggles, `#m1` mutes, `#m0` unmutes.
   Needs SerialPrints 1.0.0 in `lib_deps`.

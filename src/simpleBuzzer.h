@@ -4,7 +4,9 @@
  *
  * Beeps play in the background: soundTheBuzzer...() returns at once, so the
  * task that sounds an alarm is never held up. Muting stops a pattern that is
- * already playing. The buzzer always starts unmuted after a reboot.
+ * already playing. Mute isn't remembered: every boot starts unmuted, except
+ * with the build flag -D SILENCE_BUZZER (bench units), which starts muted.
+ * setMuteBuzzer() works before or after setupBuzzer().
  *
  * setupBuzzer() also adds the standard 'M' command to the serial menu
  * (#m toggles, #m1 mutes, #m0 unmutes) - needs SerialPrints.

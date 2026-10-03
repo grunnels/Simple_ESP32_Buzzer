@@ -19,7 +19,14 @@
 
 static int buzzerPin = -1;          // -1 = setupBuzzer() not called yet: do nothing
 static uint8_t onLevel = HIGH;
+// Not saved anywhere, so every boot starts unmuted - unless the build has
+// -D SILENCE_BUZZER (bench units), or setMuteBuzzer(true) is called, before
+// or after setupBuzzer().
+#ifdef SILENCE_BUZZER
+static volatile bool muted = true;
+#else
 static volatile bool muted = false;
+#endif
 
 static void pinOff()
 {
@@ -118,7 +125,7 @@ void setupBuzzer(int pin, bool activeHigh)
 {
     buzzerPin = pin;
     onLevel = activeHigh ? HIGH : LOW;
-    muted = false;   // always start unmuted
+    // (mute is left as it is - a setMuteBuzzer(true) before this still counts)
     pinMode(buzzerPin, OUTPUT);
     pinOff();
     startPlayer();
