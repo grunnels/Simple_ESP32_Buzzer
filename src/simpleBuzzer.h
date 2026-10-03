@@ -23,6 +23,7 @@ void setupBuzzer(int buzzerPin, bool activeHigh = true);
 void soundTheBuzzerShort(int count = 1);          // 50 ms beeps
 void soundTheBuzzerLong(int count = 1);           // 150 ms beeps
 void soundTheBuzzer(int duration, int count);     // duration ms on, duration ms off, count times
+void stopBuzzer();                                // stop what's playing now (and anything queued) - mute unchanged
 void setMuteBuzzer(bool mute);                    // unmuting beeps 3 times
 bool isBuzzerMuted();
 

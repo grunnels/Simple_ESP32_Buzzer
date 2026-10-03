@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-10-03
 - Beeps play in a background task - soundTheBuzzer...() returns at once (setup no longer waits ~1 s)
 - Muting stops a pattern that's already playing and drops queued ones
+- stopBuzzer(): stop what's playing now (e.g. an alarm being acknowledged) without changing mute
 - Mute isn't remembered across reboots (starts unmuted), except with -D SILENCE_BUZZER, which starts muted;
   setMuteBuzzer(true) before setupBuzzer() is kept
 - setupBuzzer(pin, activeHigh) - active-low buzzers supported

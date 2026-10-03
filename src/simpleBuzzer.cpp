@@ -60,6 +60,7 @@ struct BeepPattern
     uint16_t count;
 };
 static QueueHandle_t queue = nullptr;
+static volatile uint32_t stopCount = 0;   // stopBuzzer() bumps it; a pattern started before stops
 
 static void buzzerTask(void *)
 {
@@ -68,7 +69,8 @@ static void buzzerTask(void *)
     {
         if (xQueueReceive(queue, &p, portMAX_DELAY) != pdTRUE)
             continue;
-        for (int i = 0; i < p.count && !muted; i++)
+        uint32_t startedAt = stopCount;
+        for (int i = 0; i < p.count && !muted && stopCount == startedAt; i++)
         {
             pinOn();
             vTaskDelay(pdMS_TO_TICKS(p.duration));
@@ -100,6 +102,7 @@ static void clearQueued()
 {
     if (queue)
         xQueueReset(queue);
+    stopCount = stopCount + 1;   // the pattern playing right now stops after its current beep
 }
 
 #else
@@ -135,6 +138,12 @@ void setupBuzzer(int pin, bool activeHigh)
 
 void soundTheBuzzerShort(int count) { soundTheBuzzer(50, count); }
 void soundTheBuzzerLong(int count) { soundTheBuzzer(150, count); }
+
+void stopBuzzer()
+{
+    clearQueued();
+    pinOff();
+}
 
 void setMuteBuzzer(bool mute)
 {
