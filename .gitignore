@@ -1,0 +1,18 @@
+# PlatformIO build output (if examples are ever built in place)
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Editor settings
+.vscode/
+*.code-workspace
+
+# Compiled files (off-chip test builds)
+*.o
+*.out
+*.exe
+*.dSYM/
+
+# macOS
+.DS_Store
+._*
