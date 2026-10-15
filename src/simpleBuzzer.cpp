@@ -40,7 +40,13 @@ static void pinOn()
         digitalWrite(buzzerPin, onLevel);
 }
 
-// #m toggles, #m1 mutes, #m0 unmutes
+// m toggles, m1 mutes, m0 unmutes (2026-10-15: listed with addMenuOptions - ?m)
+static const MenuOption MUTE_OPTIONS[] = {
+    {"", "mute / unmute (toggles)"},
+    {"1", "mute"},
+    {"0", "unmute"},
+};
+
 static void muteCommand(const char *value)
 {
     if (value && value[0] == '1')
@@ -133,6 +139,7 @@ void setupBuzzer(int pin, bool activeHigh)
     pinOff();
     startPlayer();
     addStandardMenuItem(SP_KEY_MUTE, muteCommand);
+    addMenuOptions(SP_KEY_MUTE, MUTE_OPTIONS);   // needs SerialPrints 1.2.0
     soundTheBuzzerShort(7);   // "I'm alive" - plays in the background
 }
 
